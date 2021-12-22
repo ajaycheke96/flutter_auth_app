@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/Models/login_model.dart';
 import 'package:flutter_auth_app/Screens/Dashboard/admin_dashboard.dart';
+import 'package:flutter_auth_app/Screens/Dashboard/employee_dashboard.dart';
 import 'package:flutter_auth_app/Screens/Dashboard/parent_dashboard.dart';
 import 'package:flutter_auth_app/Screens/Dashboard/student_dashboard.dart';
 import 'package:flutter_auth_app/Screens/Login/components/background.dart';
@@ -143,9 +144,7 @@ class _BodyState extends State<Body> {
               {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => AlertDialog(
-                      content: Text("Teacher dashboard"),
-                    ),
+                    builder: (context) => EmployeeDashboard(),
                   ),
                 ),
               }

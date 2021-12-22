@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_auth_app/Screens/Dashboard/components/bottom_widget_bar.dart';
+import 'package:flutter_auth_app/Screens/Dashboard/components/logout_button.dart';
 import 'package:flutter_auth_app/Screens/Login/login_screen.dart';
-import 'package:flutter_auth_app/Screens/UserProfile/user_profile.dart';
+import 'package:flutter_auth_app/Screens/UserProfile/employee_user_profile.dart';
 import 'package:flutter_auth_app/Services/auth_service.dart';
-import 'package:flutter_auth_app/Utils/http_utils.dart';
 import 'package:flutter_auth_app/constants.dart';
 
-class StudentDashboard extends StatefulWidget {
-  const StudentDashboard({Key? key}) : super(key: key);
+class EmployeeDashboard extends StatefulWidget {
+  const EmployeeDashboard({Key? key}) : super(key: key);
 
   @override
-  State<StudentDashboard> createState() => _StudentDashboardState();
+  _EmployeeDashboardState createState() => _EmployeeDashboardState();
 }
 
-class _StudentDashboardState extends State<StudentDashboard> {
+class _EmployeeDashboardState extends State<EmployeeDashboard> {
   final String routeName = '/student-dashboard';
 
   int _selectedIndex = 0;
@@ -50,14 +49,14 @@ class _StudentDashboardState extends State<StudentDashboard> {
         style: TextStyle(fontSize: 24),
       ),
     ),
-    UserProfile(),
+    EmployeeUserProfile(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Student Dashboard"),
+        title: Text("Employee Dashboard"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.comment),
@@ -67,15 +66,25 @@ class _StudentDashboardState extends State<StudentDashboard> {
           IconButton(
             icon: Icon(Icons.settings),
             tooltip: 'Setting Icon',
-            onPressed: () {},
+            onPressed: () {
+              AuthService().removeAllLoginRecords();
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+                (_) => false,
+              );
+            },
           ), //IconButton
         ], //<Widget>[]
         backgroundColor: Colors.blueAccent[400],
         elevation: 50.0,
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          tooltip: 'Menu Icon',
+          onPressed: () {},
+        ), //IconButton
         systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
       body: _widgetOptions.elementAt(_selectedIndex),
-      drawer: HttpUtils().buildLogoutDrawer(context),
       bottomNavigationBar: // BottomWidgetBar(),
           BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -160,34 +169,9 @@ class _StudentDashboardState extends State<StudentDashboard> {
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
-            // HttpUtils.showSuccess(context, "$index no. Page has been selected!");
           });
         },
       ),
     );
   }
-
-//   Widget _buildBody() {
-//   return Container(
-//     color: activeTabColor[TabItem.red],
-//     alignment: Alignment.center,
-//     child: FlatButton(
-//       child: Text(
-//         'PUSH',
-//         style: TextStyle(fontSize: 32.0, color: Colors.white),
-//       ),
-//       onPressed: _push,
-//     )
-//   );
-// }
-
-// void _push() {
-//   Navigator.of(context).push(MaterialPageRoute(
-//     // we'll look at ColorDetailPage later
-//     builder: (context) => ColorDetailPage(
-//       color: activeTabColor[TabItem.red],
-//       title: tabName[TabItem.red],
-//     ),
-//   ));
-// }
 }

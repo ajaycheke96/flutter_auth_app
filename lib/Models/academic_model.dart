@@ -1,15 +1,10 @@
-class AcademicSessionModel {
-  final int id;
-  final String createdAt;
-  final String description;
-  final String endDate;
-  final String isDefault;
-  final String name;
-  final String options;
-  final String startDate;
-  final String updatedAt;
+import 'package:json_annotation/json_annotation.dart';
 
-  AcademicSessionModel(
+part 'academic_model.g.dart';
+
+@JsonSerializable()
+class AcademicSessionModel {
+  AcademicSessionModel({
     this.id,
     this.createdAt,
     this.description,
@@ -19,19 +14,23 @@ class AcademicSessionModel {
     this.options,
     this.startDate,
     this.updatedAt,
-  );
+  });
 
-  Map<String, dynamic> toJson() {
-    return {
-      "id": this.id,
-      "createdAt": this.createdAt,
-      "description": this.description,
-      "endDate": this.endDate,
-      "isDefault": this.isDefault,
-      "name": this.name,
-      "options": this.options,
-      "startDate": this.startDate,
-      "updatedAt": this.updatedAt,
-    };
-  }
+  int? id;
+  String? createdAt;
+  String? description;
+  String? endDate;
+  dynamic isDefault;
+  String? name;
+  String? options;
+  String? startDate;
+  String? updatedAt;
+
+  factory AcademicSessionModel.fromJson(Map<String, dynamic> json) =>
+      _$AcademicSessionModelFromJson(json);
+  Map<String, dynamic> toJson() => _$AcademicSessionModelToJson(this);
+
+  List<AcademicSessionModel> parseJsonToList(List<dynamic> json) => (json)
+      .map((e) => AcademicSessionModel.fromJson(e as Map<String, dynamic>))
+      .toList();
 }

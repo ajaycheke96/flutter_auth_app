@@ -3,49 +3,47 @@ import 'dart:html';
 import 'dart:io';
 
 // import 'package:flutter_session/flutter_session.dart';
+import 'package:flutter_auth_app/Models/academic_model.dart';
 import 'package:flutter_auth_app/Shared/master_api.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  // ignore: non_constant_identifier_names
-  // static final SESSION = FlutterSession();
 
-  // Future<dynamic> register(String email, String password) async {
-  //   List<String> arr=email.split("@");
-  //   String username=arr.first;
-  //   String tenantName=arr.elementAt(1).split(".").first;
-  //   try {
-  //     Uri uri= Uri(host: '$baseUrl', port: 4000,path: '/auth/register');
-  //     var res = await http.post(uri, body: {
-  //       'email': email,
-  //       'password': password,
-  //     },
-  //     headers: {
-  //       'X-Tenant':
-  //     });
+  Future<Map<String, String>> buildHeaders() async {
+    UserStore store = await getUserData();
+    Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.acceptHeader: 'application/json',
+      HttpHeaders.authorizationHeader: store.token.toString(),
+      "X-Tenant": store.tenantName.toString()
+    };
+    return headers;
+  }
 
-  //     return res?.body;
-  //   } finally {
-  //     // done you can do something here
-  //   }
-  // }
   Future checkService() async {
-    String token = '';
-    String tenantName = '';
-    await getUserData().then((value) => {
-          tenantName = value.tenantName.toString(),
-          token = value.token.toString(),
-        });
+    UserStore store = await getUserData();
+    Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+      HttpHeaders.acceptHeader: 'application/json',
+      HttpHeaders.authorizationHeader: store.token.toString(),
+      "X-Tenant": store.tenantName.toString()
+    };
+    Uri uri = Uri.parse(MasterApi.getAllAcademicSession);
 
-    final response = await http.get(Uri.parse(MasterApi.getAllAcademicSession),
-        headers: {
-          "X-Tenant": tenantName.toString(),
-          HttpHeaders.authorizationHeader: token
-        });
+    final response = await http.get(
+      uri,
+      headers: headers,
+    );
     print(response.body);
     var decode = jsonDecode(response.body);
+
+    List<AcademicSessionModel> academicList =
+        AcademicSessionModel().parseJsonToList(decode['data'] as List<dynamic>);
+
+    print(academicList.first.id);
+
     if (decode['status'] == 200) {
       return true;
     }
@@ -118,7 +116,7 @@ class AuthService {
               userData['roles']?[0]?['id'],
               userData['roles']?[0]?['name'],
               tenantName);
-        }else{
+        } else {
           throw new Exception("Failed to load data!");
         }
         return getUserData();
@@ -172,13 +170,19 @@ class LoginReq {
 }
 
 class UserStore {
-  final int? userId;
-  final String? username;
-  final int? roleId;
-  final String? roleName;
-  final String? token;
-  final String? tenantName;
+  int? userId;
+  String? username;
+  int? roleId;
+  String? roleName;
+  String? token;
+  String? tenantName;
 
-  UserStore(this.userId, this.username, this.roleId, this.roleName, this.token,
-      this.tenantName);
+  UserStore(
+    this.userId,
+    this.username,
+    this.roleId,
+    this.roleName,
+    this.token,
+    this.tenantName,
+  );
 }

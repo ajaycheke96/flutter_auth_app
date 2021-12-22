@@ -1,9 +1,9 @@
 class PayloadModel {
-  final String timestamp;
-  final int status;
-  final Object error;
-  final String message;
-  final Object data;
+  String timestamp;
+  int status;
+  Object error;
+  String message;
+  Object data;
 
   PayloadModel(
     this.timestamp,
