@@ -487,3 +487,205 @@ Map<String, dynamic> _$ParentProfileModelToJson(ParentProfileModel instance) =>
       'studentParent': instance.studentParent?.toJson(),
       'students': instance.students?.map((e) => e.toJson()).toList(),
     };
+
+StudentAttendanceModel _$StudentAttendanceModelFromJson(
+        Map<String, dynamic> json) =>
+    StudentAttendanceModel(
+      id: json['id'] as int?,
+      attendance: json['attendance'] as String?,
+      createdAt: json['createdAt'] as String?,
+      dateOfAttendance: json['dateOfAttendance'] as String?,
+      isDefault: json['isDefault'] as String?,
+      options: json['options'] as String?,
+      session: json['session'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      batch: json['batch'] == null
+          ? null
+          : BatchModel.fromJson(json['batch'] as Map<String, dynamic>),
+      subject: json['subject'] == null
+          ? null
+          : SubjectModel.fromJson(json['subject'] as Map<String, dynamic>),
+      studentAttendanceDetails: (json['studentAttendanceDetails']
+              as List<dynamic>?)
+          ?.map((e) =>
+              StudentAttendanceDetailModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$StudentAttendanceModelToJson(
+        StudentAttendanceModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'attendance': instance.attendance,
+      'createdAt': instance.createdAt,
+      'dateOfAttendance': instance.dateOfAttendance,
+      'isDefault': instance.isDefault,
+      'options': instance.options,
+      'session': instance.session,
+      'updatedAt': instance.updatedAt,
+      'batch': instance.batch?.toJson(),
+      'subject': instance.subject?.toJson(),
+      'studentAttendanceDetails':
+          instance.studentAttendanceDetails?.map((e) => e.toJson()).toList(),
+    };
+
+CourseModel _$CourseModelFromJson(Map<String, dynamic> json) => CourseModel(
+      id: json['id'] as int?,
+      createdAt: json['createdAt'] as String?,
+      description: json['description'] as String?,
+      name: json['name'] as String?,
+      options: json['options'] as String?,
+      position: json['position'] as int?,
+      updatedAt: json['updatedAt'] as String?,
+      academicSession: json['academicSession'] == null
+          ? null
+          : AcademicSessionModel.fromJson(
+              json['academicSession'] as Map<String, dynamic>),
+      courseGroup: json['courseGroup'] == null
+          ? null
+          : CourseGroupModel.fromJson(
+              json['courseGroup'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CourseModelToJson(CourseModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'createdAt': instance.createdAt,
+      'description': instance.description,
+      'name': instance.name,
+      'options': instance.options,
+      'position': instance.position,
+      'updatedAt': instance.updatedAt,
+      'academicSession': instance.academicSession?.toJson(),
+      'courseGroup': instance.courseGroup?.toJson(),
+    };
+
+CourseGroupModel _$CourseGroupModelFromJson(Map<String, dynamic> json) =>
+    CourseGroupModel(
+      id: json['id'] as int?,
+      createdAt: json['createdAt'] as String?,
+      description: json['description'] as String?,
+      name: json['name'] as String?,
+      options: json['options'] as String?,
+      position: json['position'] as int?,
+      updatedAt: json['updatedAt'] as String?,
+      academicSession: json['academicSession'] == null
+          ? null
+          : AcademicSessionModel.fromJson(
+              json['academicSession'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CourseGroupModelToJson(CourseGroupModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'createdAt': instance.createdAt,
+      'description': instance.description,
+      'name': instance.name,
+      'options': instance.options,
+      'position': instance.position,
+      'updatedAt': instance.updatedAt,
+      'academicSession': instance.academicSession?.toJson(),
+    };
+
+SubjectModel _$SubjectModelFromJson(Map<String, dynamic> json) => SubjectModel(
+      id: json['id'] as int?,
+      code: json['code'] as String?,
+      createdAt: json['createdAt'] as String?,
+      description: json['description'] as String?,
+      hasNoExam: json['hasNoExam'] as int?,
+      isElective: json['isElective'] as int?,
+      maxClassPerWeek: json['maxClassPerWeek'] as int?,
+      name: json['name'] as String?,
+      options: json['options'] as String?,
+      position: json['position'] as int?,
+      shortcode: json['shortcode'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      batch: json['batch'] == null
+          ? null
+          : BatchModel.fromJson(json['batch'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$SubjectModelToJson(SubjectModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'code': instance.code,
+      'createdAt': instance.createdAt,
+      'description': instance.description,
+      'hasNoExam': instance.hasNoExam,
+      'isElective': instance.isElective,
+      'maxClassPerWeek': instance.maxClassPerWeek,
+      'name': instance.name,
+      'options': instance.options,
+      'position': instance.position,
+      'shortcode': instance.shortcode,
+      'updatedAt': instance.updatedAt,
+      'batch': instance.batch?.toJson(),
+    };
+
+StudentAttendanceDetailModel _$StudentAttendanceDetailModelFromJson(
+        Map<String, dynamic> json) =>
+    StudentAttendanceDetailModel(
+      id: json['id'] as int?,
+      createdAt: json['createdAt'] as String?,
+      status: json['status'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      studentRecord: json['studentRecord'] == null
+          ? null
+          : StudentRecordModel.fromJson(
+              json['studentRecord'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$StudentAttendanceDetailModelToJson(
+        StudentAttendanceDetailModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'createdAt': instance.createdAt,
+      'status': instance.status,
+      'updatedAt': instance.updatedAt,
+      'studentRecord': instance.studentRecord?.toJson(),
+    };
+
+StudentRecordModel _$StudentRecordModelFromJson(Map<String, dynamic> json) =>
+    StudentRecordModel(
+      id: json['id'] as int?,
+      createdAt: json['createdAt'] as String?,
+      dateOfEntry: json['dateOfEntry'] as String?,
+      dateOfExit: json['dateOfExit'] as String?,
+      entryRemarks: json['entryRemarks'] as String?,
+      exitRemarks: json['exitRemarks'] as String?,
+      isPromoted: json['isPromoted'] as int?,
+      options: json['options'] as String?,
+      rollNumber: json['rollNumber'] as String?,
+      terminationReason: json['terminationReason'] as String?,
+      updatedAt: json['updatedAt'] as String?,
+      uploadToken: json['uploadToken'] as String?,
+      academicSession: json['academicSession'] == null
+          ? null
+          : AcademicSessionModel.fromJson(
+              json['academicSession'] as Map<String, dynamic>),
+      batch: json['batch'] == null
+          ? null
+          : BatchModel.fromJson(json['batch'] as Map<String, dynamic>),
+      student: json['student'] == null
+          ? null
+          : StudentModel.fromJson(json['student'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$StudentRecordModelToJson(StudentRecordModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'createdAt': instance.createdAt,
+      'dateOfEntry': instance.dateOfEntry,
+      'dateOfExit': instance.dateOfExit,
+      'entryRemarks': instance.entryRemarks,
+      'exitRemarks': instance.exitRemarks,
+      'isPromoted': instance.isPromoted,
+      'options': instance.options,
+      'rollNumber': instance.rollNumber,
+      'terminationReason': instance.terminationReason,
+      'updatedAt': instance.updatedAt,
+      'uploadToken': instance.uploadToken,
+      'academicSession': instance.academicSession?.toJson(),
+      'batch': instance.batch?.toJson(),
+      'student': instance.student?.toJson(),
+    };

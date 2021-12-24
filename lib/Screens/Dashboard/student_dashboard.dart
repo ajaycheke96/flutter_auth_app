@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_auth_app/Screens/Dashboard/components/bottom_widget_bar.dart';
-import 'package:flutter_auth_app/Screens/Login/login_screen.dart';
+import 'package:flutter_auth_app/Screens/Students/StudentAttendance/student_attendance_list_screen.dart';
 import 'package:flutter_auth_app/Screens/UserProfile/user_profile.dart';
-import 'package:flutter_auth_app/Services/auth_service.dart';
 import 'package:flutter_auth_app/Utils/http_utils.dart';
 import 'package:flutter_auth_app/constants.dart';
 
@@ -27,10 +25,11 @@ class _StudentDashboardState extends State<StudentDashboard> {
       ),
     ),
     Center(
-      child: Text(
-        "Activity Page",
-        style: TextStyle(fontSize: 24),
-      ),
+      child: StudentAttendanceListScreen(),
+      // Text(
+      //   "Activity Page",
+      //   style: TextStyle(fontSize: 24),
+      // ),
     ),
     Center(
       child: Text(

@@ -4,6 +4,8 @@ import 'package:flutter_auth_app/Screens/Dashboard/parent_dashboard.dart';
 import 'package:flutter_auth_app/Screens/Dashboard/student_dashboard.dart';
 import 'package:flutter_auth_app/Screens/Login/login_screen.dart';
 import 'package:flutter_auth_app/Screens/ResizablePage/resizable_page.dart';
+import 'package:flutter_auth_app/Screens/Students/StudentAttendance/student_attendance_day_screen.dart';
+import 'package:flutter_auth_app/Screens/Students/StudentAttendance/student_attendance_list_screen.dart';
 import 'package:flutter_auth_app/Services/auth_service.dart';
 import 'package:flutter_auth_app/constants.dart';
 
@@ -42,10 +44,16 @@ class MyApp extends StatelessWidget {
         primaryColor: kPrimaryColor,
         scaffoldBackgroundColor: Colors.white,
       ),
+      routes: {
+        StudentAttendanceListScreen.routeName: (ctx) =>
+            StudentAttendanceListScreen(),
+        StudentAttendanceDayScreen.routeName: (ctx) =>
+            StudentAttendanceDayScreen(),
+      },
       home: FutureBuilder(
           future: AuthService().checkService(),
           builder: (context, snapshot) {
-            print("From Main "+snapshot.data.toString());
+            print("From Main " + snapshot.data.toString());
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data == true) {
                 // return StudentDashboard();

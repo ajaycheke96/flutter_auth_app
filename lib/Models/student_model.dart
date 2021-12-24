@@ -1,3 +1,5 @@
+import 'package:flutter_auth_app/Models/academic_model.dart';
+import 'package:flutter_auth_app/Models/employee_model.dart';
 import 'package:flutter_auth_app/Models/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -94,6 +96,10 @@ class StudentModel {
   });
 
   StudentModel.empty();
+
+  static List<StudentModel> parseJsonToList(List<dynamic> json) => (json)
+      .map((e) => StudentModel.fromJson(e as Map<String, dynamic>))
+      .toList();
 
   factory StudentModel.fromJson(Map<String, dynamic> json) =>
       _$StudentModelFromJson(json);
@@ -469,4 +475,197 @@ class ParentProfileModel {
   factory ParentProfileModel.fromJson(Map<String, dynamic> json) =>
       _$ParentProfileModelFromJson(json);
   Map<String, dynamic> toJson() => _$ParentProfileModelToJson(this);
+}
+
+// Student Attendance
+@JsonSerializable(explicitToJson: true)
+class StudentAttendanceModel {
+  int? id;
+  String? attendance;
+  String? createdAt;
+  String? dateOfAttendance;
+  String? isDefault;
+  String? options;
+  String? session;
+  String? updatedAt;
+  BatchModel? batch;
+  SubjectModel? subject;
+  List<StudentAttendanceDetailModel>? studentAttendanceDetails;
+
+  StudentAttendanceModel(
+      {this.id,
+      this.attendance,
+      this.createdAt,
+      this.dateOfAttendance,
+      this.isDefault,
+      this.options,
+      this.session,
+      this.updatedAt,
+      this.batch,
+      this.subject,
+      this.studentAttendanceDetails});
+
+  static List<StudentAttendanceModel> parseJsonToList(List<dynamic> json) =>
+      (json)
+          .map(
+              (e) => StudentAttendanceModel.fromJson(e as Map<String, dynamic>))
+          .toList();
+
+  factory StudentAttendanceModel.fromJson(Map<String, dynamic> json) =>
+      _$StudentAttendanceModelFromJson(json);
+  Map<String, dynamic> toJson() => _$StudentAttendanceModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CourseModel {
+  int? id;
+  String? createdAt;
+  String? description;
+  String? name;
+  String? options;
+  int? position;
+  String? updatedAt;
+  AcademicSessionModel? academicSession;
+  CourseGroupModel? courseGroup;
+
+  CourseModel(
+      {this.id,
+      this.createdAt,
+      this.description,
+      this.name,
+      this.options,
+      this.position,
+      this.updatedAt,
+      this.academicSession,
+      this.courseGroup});
+
+  factory CourseModel.fromJson(Map<String, dynamic> json) =>
+      _$CourseModelFromJson(json);
+  Map<String, dynamic> toJson() => _$CourseModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class CourseGroupModel {
+  int? id;
+  String? createdAt;
+  String? description;
+  String? name;
+  String? options;
+  int? position;
+  String? updatedAt;
+  AcademicSessionModel? academicSession;
+
+  CourseGroupModel(
+      {this.id,
+      this.createdAt,
+      this.description,
+      this.name,
+      this.options,
+      this.position,
+      this.updatedAt,
+      this.academicSession});
+
+  factory CourseGroupModel.fromJson(Map<String, dynamic> json) =>
+      _$CourseGroupModelFromJson(json);
+  Map<String, dynamic> toJson() => _$CourseGroupModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class SubjectModel {
+  int? id;
+  String? code;
+  String? createdAt;
+  String? description;
+  int? hasNoExam;
+  int? isElective;
+  int? maxClassPerWeek;
+  String? name;
+  String? options;
+  int? position;
+  String? shortcode;
+  String? updatedAt;
+  BatchModel? batch;
+
+  SubjectModel(
+      {this.id,
+      this.code,
+      this.createdAt,
+      this.description,
+      this.hasNoExam,
+      this.isElective,
+      this.maxClassPerWeek,
+      this.name,
+      this.options,
+      this.position,
+      this.shortcode,
+      this.updatedAt,
+      this.batch});
+
+  factory SubjectModel.fromJson(Map<String, dynamic> json) =>
+      _$SubjectModelFromJson(json);
+  Map<String, dynamic> toJson() => _$SubjectModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class StudentAttendanceDetailModel {
+  int? id;
+  String? createdAt;
+  String? status;
+  String? updatedAt;
+  StudentRecordModel? studentRecord;
+
+  StudentAttendanceDetailModel(
+      {this.id,
+      this.createdAt,
+      this.status,
+      this.updatedAt,
+      this.studentRecord});
+
+  factory StudentAttendanceDetailModel.fromJson(Map<String, dynamic> json) =>
+      _$StudentAttendanceDetailModelFromJson(json);
+  Map<String, dynamic> toJson() => _$StudentAttendanceDetailModelToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class StudentRecordModel {
+  int? id;
+  String? createdAt;
+  String? dateOfEntry;
+  String? dateOfExit;
+  String? entryRemarks;
+  String? exitRemarks;
+  int? isPromoted;
+  String? options;
+  String? rollNumber;
+  String? terminationReason;
+  String? updatedAt;
+  String? uploadToken;
+  AcademicSessionModel? academicSession;
+  BatchModel? batch;
+  StudentModel? student;
+
+  StudentRecordModel(
+      {this.id,
+      this.createdAt,
+      this.dateOfEntry,
+      this.dateOfExit,
+      this.entryRemarks,
+      this.exitRemarks,
+      this.isPromoted,
+      this.options,
+      this.rollNumber,
+      this.terminationReason,
+      this.updatedAt,
+      this.uploadToken,
+      this.academicSession,
+      this.batch,
+      this.student});
+
+  static List<StudentRecordModel> parseJsonToList(List<dynamic> json) => (json)
+      .map((e) => StudentRecordModel.fromJson(e as Map<String, dynamic>))
+      .toList();
+
+  factory StudentRecordModel.fromJson(Map<String, dynamic> json) =>
+      _$StudentRecordModelFromJson(json);
+  Map<String, dynamic> toJson() => _$StudentRecordModelToJson(this);
 }

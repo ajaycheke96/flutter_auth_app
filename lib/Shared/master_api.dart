@@ -14,9 +14,14 @@ class MasterApi{
   // Student
   static const getStudentProfileRecordByUser= '$baseUrl/student/get-student-profile-record';
   static const getStudentByUser='$baseUrl/student/get-student-by-user';
+  static const getStudentRecordByBatch='$baseUrl/studentRecord/get-student-record-by-batch';
 
   static const getStudentRecordByStudentAndAcademicSession= '$baseUrl/studentRecord/getStudentRecordByStudent';
   static const getParentProfileRecordByUser= '$baseUrl/studentParent/get-parent-profile-record';
+
+  static const getStudentAttendenceByMonthYear= '$baseUrl/studentAttendance/getStudentAttendanceByMonth';
+  static const getAllStudentAttendance= '$baseUrl/studentAttendance/listAllStudentAttendance';
+  static const saveStudentAttendance= '$baseUrl/studentAttendance/saveStudentAttendance';
 
   // Employee
   static const getEmployeeProfileRecordByUser= '$baseUrl/employee/get-employee-profile-record';

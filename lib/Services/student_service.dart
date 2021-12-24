@@ -212,4 +212,114 @@ class StudentService {
       throw new Exception(e);
     }
   }
+
+  Future<List<StudentAttendanceModel>>
+      getStudentAttendanceByMonthYearBatchANDSubject(
+          int subjectId, int batchId, String month, int year) async {
+    try {
+      Map<String, String> headers = await _authService.buildHeaders();
+
+      var payload = {
+        'subjectId': subjectId,
+        'batchId': batchId,
+        'month': month,
+        'year': year
+      };
+
+      Uri uri = Uri.parse(MasterApi.getStudentAttendenceByMonthYear);
+      print(uri);
+      var res = await http.post(
+        uri,
+        headers: headers,
+        body: jsonEncode(payload),
+      );
+      // print(res.body);
+      var decode = jsonDecode(res.body);
+      List<StudentAttendanceModel> studentAttendanceList = [];
+      if (decode['data'] != null) {
+        studentAttendanceList =
+            StudentAttendanceModel.parseJsonToList(decode['data']);
+      }
+      return studentAttendanceList;
+    } catch (e, s) {
+      print(s);
+      throw new Exception(e);
+    }
+  }
+
+  Future<List<StudentRecordModel>> getStudentRecordsByBatch(int batchId) async {
+    try {
+      Map<String, String> headers = await _authService.buildHeaders();
+
+      var payload = {'batchId': batchId};
+
+      Uri uri = Uri.parse(MasterApi.getStudentRecordByBatch);
+      print(uri);
+      var res = await http.post(
+        uri,
+        headers: headers,
+        body: jsonEncode(payload),
+      );
+      // print(res.body);
+      var decode = jsonDecode(res.body);
+      List<StudentRecordModel> studentList = [];
+      if (decode['data'] != null) {
+        studentList = StudentRecordModel.parseJsonToList(decode['data']);
+      }
+      return studentList;
+    } catch (e, s) {
+      print(s);
+      throw new Exception(e);
+    }
+  }
+
+  Future<List<StudentAttendanceModel>> getAllStudentAttendance() async {
+    try {
+      Map<String, String> headers = await _authService.buildHeaders();
+
+      Uri uri = Uri.parse(MasterApi.getAllStudentAttendance);
+      print(uri);
+      var res = await http.get(
+        uri,
+        headers: headers,
+      );
+      // print(res.body);
+      var decode = jsonDecode(res.body);
+      List<StudentAttendanceModel> studentAttendanceList = [];
+      if (decode['data'] != null) {
+        studentAttendanceList =
+            StudentAttendanceModel.parseJsonToList(decode['data']);
+      }
+      return studentAttendanceList;
+    } catch (e, s) {
+      print(s);
+      throw new Exception(e);
+    }
+  }
+
+  Future saveStudentAttendance(StudentAttendanceModel studentAttendanceModel) async{
+    try {
+      Map<String, String> headers = await _authService.buildHeaders();
+
+      Uri uri = Uri.parse(MasterApi.saveStudentAttendance);
+      print(uri);
+      var res = await http.post(
+        uri,
+        headers: headers,
+        body: jsonEncode(studentAttendanceModel.toJson()),
+      );
+      // print(res.body);
+      var decode = jsonDecode(res.body);
+      String message= '';
+      if (decode['data'] != null) {
+        if(decode['status']==200){
+          message=decode['message'];
+        }
+      }
+      return message;
+    } catch (e, s) {
+      print(s);
+      throw new Exception(e);
+    }
+  }
 }
