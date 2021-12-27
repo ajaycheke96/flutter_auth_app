@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/Screens/Students/StudentAttendance/student_attendance_list_screen.dart';
+import 'package:flutter_auth_app/Screens/Students/student_attendance_screen.dart';
 import 'package:flutter_auth_app/Screens/UserProfile/user_profile.dart';
 import 'package:flutter_auth_app/Utils/http_utils.dart';
 import 'package:flutter_auth_app/constants.dart';
@@ -25,11 +26,12 @@ class _StudentDashboardState extends State<StudentDashboard> {
       ),
     ),
     Center(
-      child: StudentAttendanceListScreen(),
-      // Text(
-      //   "Activity Page",
-      //   style: TextStyle(fontSize: 24),
-      // ),
+      child:
+          // StudentAttendanceScreen(),
+          Text(
+        "Activity Page",
+        style: TextStyle(fontSize: 24),
+      ),
     ),
     Center(
       child: Text(
@@ -55,6 +57,29 @@ class _StudentDashboardState extends State<StudentDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   backgroundColor: kPrimaryColor.withOpacity(.03),
+      //   elevation: 0,
+      //   leading: IconButton(
+      //     icon: Icon(Icons.menu_rounded),
+      //     color: kPrimaryColor,
+      //     onPressed: () {},
+      //   ),
+      //   // leading: IconButton(
+      //   //   icon: Icon(
+      //   //     Icons.arrow_back_ios,
+      //   //     color: kPrimaryColor,
+      //   //   ),
+      //   //   onPressed: () {
+      //   //     Navigator.pop(context);
+      //   //   },
+      //   // ),
+      //   // title: Text(
+      //   //   "Student Dashboard",
+      //   //   style: TextStyle(color: kPrimaryColor),
+      //   // ),
+      // ),
+
       appBar: AppBar(
         title: Text("Student Dashboard"),
         actions: <Widget>[
@@ -73,7 +98,9 @@ class _StudentDashboardState extends State<StudentDashboard> {
         elevation: 50.0,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
       ),
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: Container(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
       drawer: HttpUtils().buildLogoutDrawer(context),
       bottomNavigationBar: // BottomWidgetBar(),
           BottomNavigationBar(

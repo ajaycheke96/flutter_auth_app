@@ -140,7 +140,8 @@ class _BodyState extends State<Body> {
                   ),
                 ),
               }
-            else if (user.roleName.toString() == "ROLE_TEACHER")
+            else if (user.roleName.toString() == "ROLE_TEACHER" ||
+                user.roleName.toString() == "ROLE_EMP")
               {
                 Navigator.of(context).push(
                   MaterialPageRoute(

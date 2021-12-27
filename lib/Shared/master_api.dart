@@ -11,6 +11,9 @@ class MasterApi{
   static const getDefaultAcademicSession= '$baseUrl/academicSession/defaultAcademicSession';
   static const getAllAcademicSession='$baseUrl/academicSession/listAllAcademicSessions';
 
+  static const getBatchesByTeacherUser='$baseUrl/batch/get-batch-by-teacher-user';
+  static const getSubjectsByUser='$baseUrl/subject/getSubjectAsPerUser';
+
   // Student
   static const getStudentProfileRecordByUser= '$baseUrl/student/get-student-profile-record';
   static const getStudentByUser='$baseUrl/student/get-student-by-user';

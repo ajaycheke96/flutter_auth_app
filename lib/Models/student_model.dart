@@ -1,5 +1,5 @@
 import 'package:flutter_auth_app/Models/academic_model.dart';
-import 'package:flutter_auth_app/Models/employee_model.dart';
+import 'package:flutter_auth_app/Models/config_model.dart';
 import 'package:flutter_auth_app/Models/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -166,29 +166,6 @@ class StudentDocumentModel {
 }
 
 @JsonSerializable()
-class StudentDocumentTypeModel {
-  int? id;
-  String? createdAt;
-  String? description;
-  String? name;
-  String? options;
-  String? updatedAt;
-
-  StudentDocumentTypeModel({
-    this.id,
-    this.createdAt,
-    this.description,
-    this.name,
-    this.options,
-    this.updatedAt,
-  });
-
-  factory StudentDocumentTypeModel.fromJson(Map<String, dynamic> json) =>
-      _$StudentDocumentTypeModelFromJson(json);
-  Map<String, dynamic> toJson() => _$StudentDocumentTypeModelToJson(this);
-}
-
-@JsonSerializable()
 class StudentQualificationModel {
   int? id;
   String? boardName;
@@ -221,98 +198,6 @@ class StudentQualificationModel {
   factory StudentQualificationModel.fromJson(Map<String, dynamic> json) =>
       _$StudentQualificationModelFromJson(json);
   Map<String, dynamic> toJson() => _$StudentQualificationModelToJson(this);
-}
-
-@JsonSerializable()
-class BloodGroupModel {
-  int? id;
-  String? createdAt;
-  String? description;
-  String? name;
-  String? options;
-  String? updatedAt;
-
-  BloodGroupModel({
-    this.id,
-    this.createdAt,
-    this.description,
-    this.name,
-    this.options,
-    this.updatedAt,
-  });
-
-  factory BloodGroupModel.fromJson(Map<String, dynamic> json) =>
-      _$BloodGroupModelFromJson(json);
-  Map<String, dynamic> toJson() => _$BloodGroupModelToJson(this);
-}
-
-@JsonSerializable()
-class ReligionModel {
-  int? id;
-  String? createdAt;
-  String? description;
-  String? name;
-  String? options;
-  String? updatedAt;
-
-  ReligionModel({
-    this.id,
-    this.createdAt,
-    this.description,
-    this.name,
-    this.options,
-    this.updatedAt,
-  });
-
-  factory ReligionModel.fromJson(Map<String, dynamic> json) =>
-      _$ReligionModelFromJson(json);
-  Map<String, dynamic> toJson() => _$ReligionModelToJson(this);
-}
-
-@JsonSerializable()
-class CategoryModel {
-  int? id;
-  String? createdAt;
-  String? description;
-  String? name;
-  String? options;
-  String? updatedAt;
-
-  CategoryModel({
-    this.id,
-    this.createdAt,
-    this.description,
-    this.name,
-    this.options,
-    this.updatedAt,
-  });
-
-  factory CategoryModel.fromJson(Map<String, dynamic> json) =>
-      _$CategoryModelFromJson(json);
-  Map<String, dynamic> toJson() => _$CategoryModelToJson(this);
-}
-
-@JsonSerializable()
-class CasteModel {
-  int? id;
-  String? createdAt;
-  String? description;
-  String? name;
-  String? options;
-  String? updatedAt;
-
-  CasteModel({
-    this.id,
-    this.createdAt,
-    this.description,
-    this.name,
-    this.options,
-    this.updatedAt,
-  });
-
-  factory CasteModel.fromJson(Map<String, dynamic> json) =>
-      _$CasteModelFromJson(json);
-  Map<String, dynamic> toJson() => _$CasteModelToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -514,96 +399,6 @@ class StudentAttendanceModel {
   factory StudentAttendanceModel.fromJson(Map<String, dynamic> json) =>
       _$StudentAttendanceModelFromJson(json);
   Map<String, dynamic> toJson() => _$StudentAttendanceModelToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class CourseModel {
-  int? id;
-  String? createdAt;
-  String? description;
-  String? name;
-  String? options;
-  int? position;
-  String? updatedAt;
-  AcademicSessionModel? academicSession;
-  CourseGroupModel? courseGroup;
-
-  CourseModel(
-      {this.id,
-      this.createdAt,
-      this.description,
-      this.name,
-      this.options,
-      this.position,
-      this.updatedAt,
-      this.academicSession,
-      this.courseGroup});
-
-  factory CourseModel.fromJson(Map<String, dynamic> json) =>
-      _$CourseModelFromJson(json);
-  Map<String, dynamic> toJson() => _$CourseModelToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class CourseGroupModel {
-  int? id;
-  String? createdAt;
-  String? description;
-  String? name;
-  String? options;
-  int? position;
-  String? updatedAt;
-  AcademicSessionModel? academicSession;
-
-  CourseGroupModel(
-      {this.id,
-      this.createdAt,
-      this.description,
-      this.name,
-      this.options,
-      this.position,
-      this.updatedAt,
-      this.academicSession});
-
-  factory CourseGroupModel.fromJson(Map<String, dynamic> json) =>
-      _$CourseGroupModelFromJson(json);
-  Map<String, dynamic> toJson() => _$CourseGroupModelToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class SubjectModel {
-  int? id;
-  String? code;
-  String? createdAt;
-  String? description;
-  int? hasNoExam;
-  int? isElective;
-  int? maxClassPerWeek;
-  String? name;
-  String? options;
-  int? position;
-  String? shortcode;
-  String? updatedAt;
-  BatchModel? batch;
-
-  SubjectModel(
-      {this.id,
-      this.code,
-      this.createdAt,
-      this.description,
-      this.hasNoExam,
-      this.isElective,
-      this.maxClassPerWeek,
-      this.name,
-      this.options,
-      this.position,
-      this.shortcode,
-      this.updatedAt,
-      this.batch});
-
-  factory SubjectModel.fromJson(Map<String, dynamic> json) =>
-      _$SubjectModelFromJson(json);
-  Map<String, dynamic> toJson() => _$SubjectModelToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)

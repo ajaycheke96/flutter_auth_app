@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_app/Models/academic_model.dart';
 import 'package:flutter_auth_app/Models/employee_model.dart';
 import 'package:flutter_auth_app/Screens/UserProfile/services/profile_image_helper.dart';
 import 'package:flutter_auth_app/Screens/UserProfile/services/user_utils.dart';

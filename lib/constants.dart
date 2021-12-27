@@ -7,6 +7,21 @@ const kPrimaryLightColor = Color(0xFFF1E6FF);
 const kAccentBtn = Colors.blueAccent;
 const kAccentActiveBtn = Colors.purpleAccent;
 
+Map<String, String> headers = {
+  "Content-Type": "application/json; charset=UTF-8"
+};
 
-Map<String,String> headers = {                           
-       "Content-Type": "application/json; charset=UTF-8" };
+const List<String> months = <String>[
+  "JANUARY",
+  "FEBRUARY",
+  "MARCH",
+  "APRIL",
+  "MAY",
+  "JUNE",
+  "JULY",
+  "AUGUST",
+  "SEPTEMBER",
+  "OCTOBER",
+  "NOVEMBER",
+  "DECEMBER",
+];

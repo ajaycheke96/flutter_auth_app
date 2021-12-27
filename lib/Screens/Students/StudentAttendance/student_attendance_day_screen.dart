@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/Models/student_model.dart';
+import 'package:flutter_auth_app/Screens/Students/StudentAttendance/student_attendance_list_screen.dart';
 import 'package:flutter_auth_app/Services/student_service.dart';
 import 'package:flutter_auth_app/Utils/http_utils.dart';
+import 'package:flutter_auth_app/constants.dart';
 
-class StudentAttendanceDayScreen extends StatefulWidget {
-  static const String routeName = "/student-attendance-day";
-  const StudentAttendanceDayScreen({Key? key}) : super(key: key);
-
-  @override
-  _StudentAttendanceDayScreenState createState() =>
-      _StudentAttendanceDayScreenState();
-}
-
-class _StudentAttendanceDayScreenState
-    extends State<StudentAttendanceDayScreen> {
+class StudentAttendanceDayScreen extends StatelessWidget {
+  static const routeName = "/student-attendance-by-day";
   List<Widget> widgets = [];
   StudentAttendanceModel studentAttendanceModel = StudentAttendanceModel();
 
-  _build(BuildContext context) {
-    studentAttendanceModel = StudentAttendanceModel.fromJson(
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>);
-  }
+  StudentAttendanceDayScreen({Key? key}) : super(key: key);
+
+  // _build(BuildContext context) {
+  //   studentAttendanceModel = StudentAttendanceModel.fromJson(
+  //       ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>);
+  // }
 
   @override
   Widget build(BuildContext context) {
-    // if (studentAttendanceModel.id == null) {
-    _build(context);
-    // }
+    // // if (studentAttendanceModel.id == null) {
+    // _build(context);
+    // // }
+    studentAttendanceModel = StudentAttendanceModel.fromJson(
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>);
 
     widgets = [
-      _buildTitle("Edit Student Attendance Reocrds"),
       _buildInfoRow(
           'Course Name: ${studentAttendanceModel.batch!.course!.name}'),
       _buildInfoRow('Batch Name: ${studentAttendanceModel.batch!.name}'),
@@ -40,28 +36,43 @@ class _StudentAttendanceDayScreenState
       )
     ];
 
-    return Container(
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: widgets,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: kPrimaryColor,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: _buildTitle("Edit Student Attendance Reocrds"),
+      ),
+      // AppBar(
+      //   title: Text("Edit Student Attendance Reocrds"),
+      // ),
+      body: Container(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            children: widgets,
+          ),
         ),
       ),
     );
   }
 
-  Row _buildTitle(title) {
-    return Row(
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
-      mainAxisAlignment: MainAxisAlignment.center,
+  Text _buildTitle(title) {
+    return Text(
+      title,
+      style: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
     );
   }
 
@@ -73,6 +84,7 @@ class _StudentAttendanceDayScreenState
           style: TextStyle(fontSize: 18),
         ),
       ],
+      mainAxisAlignment: MainAxisAlignment.center,
     );
   }
 }
@@ -193,8 +205,12 @@ class _StudentAttendanceEditRecordState
                         '${e.studentRecord!.student!.firstName} ${e.status}'));
                 _studentService
                     .saveStudentAttendance(studentAttendanceModel)
-                    .then((value) => HttpUtils.showSuccess(context, value))
-                    .onError((error, stackTrace) =>
+                    .then(
+                  (value) {
+                    Navigator.pop(context);
+                    return HttpUtils.showSuccess(context, value);
+                  },
+                ).onError((error, stackTrace) =>
                         HttpUtils.showError(context, error.toString()));
               },
               child: Text("Update Attendance"))

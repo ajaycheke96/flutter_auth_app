@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/Screens/Dashboard/components/logout_button.dart';
 import 'package:flutter_auth_app/Screens/Login/login_screen.dart';
+import 'package:flutter_auth_app/Screens/Students/student_attendance_screen.dart';
 import 'package:flutter_auth_app/Screens/UserProfile/employee_user_profile.dart';
 import 'package:flutter_auth_app/Services/auth_service.dart';
 import 'package:flutter_auth_app/constants.dart';
@@ -38,10 +39,11 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
       ),
     ),
     Center(
-      child: Text(
-        "Contact Page",
-        style: TextStyle(fontSize: 24),
-      ),
+      child: StudentAttendanceScreen(),
+      // Text(
+      //   "Student ",
+      //   style: TextStyle(fontSize: 24),
+      // ),
     ),
     Center(
       child: Text(
@@ -132,7 +134,7 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
               color: kAccentBtn,
               size: 36,
             ),
-            label: 'CONTACT',
+            label: 'STUDENT',
             activeIcon: Icon(
               Icons.import_contacts_rounded,
               color: kAccentActiveBtn,

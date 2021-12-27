@@ -22,4 +22,42 @@ class AcademicService {
       throw Exception(e);
     }
   }
+
+  Future<List<BatchModel>> getBatchesByTeacherUser() async {
+    try {
+      Map<String, String> headers = await _authService.buildHeaders();
+      UserStore userStore = await _authService.getUserData();
+      var payload = {"id": userStore.userId};
+      var res = await http.post(
+        Uri.parse(MasterApi.getBatchesByTeacherUser),
+        headers: headers,
+        body: jsonEncode(payload),
+      );
+      var decode = jsonDecode(res.body);
+      print(decode);
+      return BatchModel().parseJsonToList(decode['data']);
+    } catch (e, s) {
+      print(s);
+      throw Exception(e);
+    }
+  }
+
+  Future<List<SubjectModel>> getSubjectByUser() async {
+    try {
+      Map<String, String> headers = await _authService.buildHeaders();
+      UserStore userStore = await _authService.getUserData();
+      var payload = {"id": userStore.userId};
+      var res = await http.post(
+        Uri.parse(MasterApi.getSubjectsByUser),
+        headers: headers,
+        body: jsonEncode(payload),
+      );
+      var decode = jsonDecode(res.body);
+      print(decode['data']);
+      return SubjectModel().parseJsonToList(decode['data']);
+    } catch (e, s) {
+      print(s);
+      throw Exception(e);
+    }
+  }
 }
