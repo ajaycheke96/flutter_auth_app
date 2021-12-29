@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_auth_app/Models/Finance/Fee/dues_model.dart';
+import 'package:flutter_auth_app/Models/academic_model.dart';
 import 'package:flutter_auth_app/Models/student_model.dart';
 import 'package:flutter_auth_app/Services/academic_service.dart';
 import 'package:flutter_auth_app/Services/auth_service.dart';
@@ -297,7 +299,39 @@ class StudentService {
     }
   }
 
-  Future saveStudentAttendance(StudentAttendanceModel studentAttendanceModel) async{
+  Future<DueModel> getInvoiceReceiptsByUser(AcademicSessionModel academicSession) async {
+    try {
+      Map<String, String> headers = await _authService.buildHeaders();
+
+      UserStore store = await _authService.getUserData();
+
+      var payload = {
+        "user": {"id": store.userId},
+        "academicSession": {"id": academicSession.id}
+      };
+      print(jsonEncode(payload));
+      Uri uri = Uri.parse(MasterApi.getInvoiceReceiptsByUser);
+      print(uri);
+      var res = await http.post(
+        uri,
+        headers: headers,
+        body: jsonEncode(payload),
+      );
+      var decode = jsonDecode(res.body);
+      if (decode['data'] != null) {
+        return DueModel.fromJson(decode['data']);
+      }
+      else{
+        throw new Exception("No Record Found");
+      }
+    } catch (e, s) {
+      print(s);
+      throw new Exception(e);
+    }
+  }
+
+  Future saveStudentAttendance(
+      StudentAttendanceModel studentAttendanceModel) async {
     try {
       Map<String, String> headers = await _authService.buildHeaders();
 
@@ -310,10 +344,10 @@ class StudentService {
       );
       // print(res.body);
       var decode = jsonDecode(res.body);
-      String message= '';
+      String message = '';
       if (decode['data'] != null) {
-        if(decode['status']==200){
-          message=decode['message'];
+        if (decode['status'] == 200) {
+          message = decode['message'];
         }
       }
       return message;

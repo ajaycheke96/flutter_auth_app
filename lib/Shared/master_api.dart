@@ -27,6 +27,8 @@ class MasterApi{
   static const getAllStudentAttendance= '$baseUrl/studentAttendance/listAllStudentAttendance';
   static const saveStudentAttendance= '$baseUrl/studentAttendance/saveStudentAttendance';
 
+  static const getInvoiceReceiptsByUser='$baseUrl/invoice-cum-receipt/getInvoiceReceiptsByUser';
+
   // Employee
   static const getEmployeeProfileRecordByUser= '$baseUrl/employee/get-employee-profile-record';
 

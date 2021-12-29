@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_auth_app/Screens/Dues/dues_screen.dart';
 import 'package:flutter_auth_app/Screens/Students/StudentAttendance/student_attendance_list_screen.dart';
 import 'package:flutter_auth_app/Screens/Students/student_attendance_screen.dart';
 import 'package:flutter_auth_app/Screens/Timetable/timetable_screen.dart';
@@ -35,10 +36,11 @@ class _StudentDashboardState extends State<StudentDashboard> {
       ),
     ),
     Center(
-      child: Text(
-        "Add Page",
-        style: TextStyle(fontSize: 24),
-      ),
+      child: DuesScreen(),
+      // Text(
+      //   "Add Page",
+      //   style: TextStyle(fontSize: 24),
+      // ),
     ),
     TimetableScreen(),
     // Center(

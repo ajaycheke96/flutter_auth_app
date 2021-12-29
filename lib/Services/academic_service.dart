@@ -75,7 +75,11 @@ class AcademicService {
       var decode = jsonDecode(res.body);
       print("decode['data']");
       print(decode['data']);
-      return MeetingModel().parseJsonToList(decode['data']);
+      if (decode['data'] != null) {
+        return MeetingModel().parseJsonToList(decode['data']);
+      } else {
+        return [];
+      }
     } catch (e, s) {
       print(s);
       throw Exception(e);

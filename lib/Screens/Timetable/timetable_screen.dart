@@ -11,6 +11,13 @@ class TimetableScreen extends StatefulWidget {
 
 class _TimetableScreenState extends State<TimetableScreen> {
   final AcademicService _academicService = AcademicService();
+  List<Meeting> meetings = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    meetings = _getDataSource();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
       showDatePickerButton: true,
       showNavigationArrow: true,
 
-      dataSource: MeetingDataSource(_getDataSource()),
+      dataSource: MeetingDataSource(meetings),
       // by default the month appointment display mode set as Indicator, we can
       // change the display mode as appointment using the appointment display
       // mode property
