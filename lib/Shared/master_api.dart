@@ -13,6 +13,7 @@ class MasterApi{
 
   static const getBatchesByTeacherUser='$baseUrl/batch/get-batch-by-teacher-user';
   static const getSubjectsByUser='$baseUrl/subject/getSubjectAsPerUser';
+  static const getAllEventsAndTimetableRecords='$baseUrl/timetable/get-smart-event-timetable';
 
   // Student
   static const getStudentProfileRecordByUser= '$baseUrl/student/get-student-profile-record';

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/Screens/Dashboard/components/logout_button.dart';
 import 'package:flutter_auth_app/Screens/Login/login_screen.dart';
 import 'package:flutter_auth_app/Screens/Students/student_attendance_screen.dart';
+import 'package:flutter_auth_app/Screens/Timetable/timetable_screen.dart';
 import 'package:flutter_auth_app/Screens/UserProfile/employee_user_profile.dart';
 import 'package:flutter_auth_app/Services/auth_service.dart';
 import 'package:flutter_auth_app/constants.dart';
@@ -38,19 +39,14 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
         style: TextStyle(fontSize: 24),
       ),
     ),
-    Center(
-      child: StudentAttendanceScreen(),
-      // Text(
-      //   "Student ",
-      //   style: TextStyle(fontSize: 24),
-      // ),
-    ),
-    Center(
-      child: Text(
-        "Community page",
-        style: TextStyle(fontSize: 24),
-      ),
-    ),
+    StudentAttendanceScreen(),
+    TimetableScreen(),
+    // Center(
+    //   child: Text(
+    //     "Community page",
+    //     style: TextStyle(fontSize: 24),
+    //   ),
+    // ),
     EmployeeUserProfile(),
   ];
 

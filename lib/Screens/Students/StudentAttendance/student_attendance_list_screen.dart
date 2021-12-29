@@ -121,8 +121,11 @@ class _StudentAttendanceListScreenState
                   );
                 }
             }
-            return ListViewCustom(
-              studentAttendanceModels: [],
+            // return ListViewCustom(
+            //   studentAttendanceModels: [],
+            // );
+            return Center(
+              child: Text("No record Found"),
             );
           },
         ),
