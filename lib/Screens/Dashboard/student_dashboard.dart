@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/Screens/Dues/dues_screen.dart';
+import 'package:flutter_auth_app/Screens/Payment/payment_home_screen.dart';
 import 'package:flutter_auth_app/Screens/Students/StudentAttendance/student_attendance_list_screen.dart';
 import 'package:flutter_auth_app/Screens/Students/student_attendance_screen.dart';
 import 'package:flutter_auth_app/Screens/Timetable/timetable_screen.dart';
@@ -49,12 +50,13 @@ class _StudentDashboardState extends State<StudentDashboard> {
     //     style: TextStyle(fontSize: 24),
     //   ),
     // ),
-    Center(
-      child: Text(
-        "Community page",
-        style: TextStyle(fontSize: 24),
-      ),
-    ),
+    PaymentHomeScreen(),
+    // Center(
+    //   child: Text(
+    //     "Community page",
+    //     style: TextStyle(fontSize: 24),
+    //   ),
+    // ),
     UserProfile(),
   ];
 

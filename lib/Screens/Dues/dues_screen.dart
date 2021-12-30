@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth_app/Models/Finance/Fee/dues_model.dart';
 import 'package:flutter_auth_app/Models/academic_model.dart';
+import 'package:flutter_auth_app/Screens/Signup/components/or_divider.dart';
 import 'package:flutter_auth_app/Services/academic_service.dart';
 import 'package:flutter_auth_app/Services/student_service.dart';
 import 'package:flutter_auth_app/constants.dart';
@@ -16,6 +18,8 @@ class _DuesScreenState extends State<DuesScreen> {
   final AcademicService _academicService = AcademicService();
 
   AcademicSessionModel selectedAcademicSession = AcademicSessionModel();
+
+  DueModel dueModel = DueModel();
 
   @override
   void initState() {
@@ -37,50 +41,61 @@ class _DuesScreenState extends State<DuesScreen> {
 
   _fetchInitRecords(AcademicSessionModel academicSessionModel) {
     print(academicSessionModel.id);
-    _studentService
-        .getInvoiceReceiptsByUser(academicSessionModel)
-        .then((value) => print(value.studentRecord!.id));
+    _studentService.getInvoiceReceiptsByUser(academicSessionModel).then(
+      (value) {
+        setState(
+          () {
+            dueModel = value;
+          },
+        );
+      },
+    );
   }
-
-  final List<Map<String, String>> _data = [
-    {
-      "name": "Reciept 1",
-      "amount": "100",
-      "date": "2021-12-01",
-      "status": "PAID",
-      "type": "Online"
-    },
-    {
-      "name": "Reciept 2",
-      "amount": "300",
-      "date": "2021-11-01",
-      "status": "PAID",
-      "type": "Online"
-    },
-    {
-      "name": "Reciept 3",
-      "amount": "200",
-      "date": "2021-10-01",
-      "status": "PAID",
-      "type": "Online"
-    }
-  ];
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       child: Column(
         children: [
           Row(
-            children: [
-              buildDuesCard("Pending", "600"),
-              buildDuesCard("Paid", "2000"),
-              buildDuesCard("Total", "2600"),
-            ],
+            children: buildDueHeading(
+                size,
+                dueModel.dueDetails != null
+                    ? dueModel.dueDetails!
+                    : DueDetailModel()),
+          ),
+          Divider(
+            color: Color(0xFFD9D9D9),
+            height: 1.5,
+          ),
+          SizedBox(
+            height: 5,
           ),
           SingleChildScrollView(
             child: Container(
-              child: Text("Reciept Details"),
+              width: size.width * 0.9,
+              child: Column(
+                children: [
+                  Center(
+                      child: Text(
+                    "Reciept Details",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                  )),
+                  Column(
+                    children: dueModel.invoiceReceipts != null &&
+                            dueModel.invoiceReceipts!.length > 0
+                        ? dueModel.invoiceReceipts!
+                            .map((e) => buildDueInvoice(e))
+                            .toList()
+                        : [
+                            Container(
+                              child: Text("No record found!"),
+                            ),
+                          ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -88,9 +103,89 @@ class _DuesScreenState extends State<DuesScreen> {
     );
   }
 
-  Widget buildDuesCard(String title, String value) => Container(
-        margin: EdgeInsets.all(40),
-        padding: EdgeInsets.all(20),
+  List<Widget> buildDueHeading(Size size, DueDetailModel dueDetail) => [
+        buildDuesCard(size, "Due", '${dueDetail.amount ?? '0.00'}'),
+        buildDuesCard(size, "Deposit", '${dueDetail.paid ?? '0.00'}'),
+        buildDuesCard(size, "Due Date",
+            '${dueDetail.dueDate != null ? dueDetail.dueDate!.substring(0, 10) : '--'}'),
+      ];
+
+  Widget buildDueInvoice(InvoiceReceiptModel invoiceReceipt) => Card(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Text(
+                    "Reciept Id: ${invoiceReceipt.id ?? '--'}",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ),
+                const Spacer(),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Text(
+                    "Status: ${invoiceReceipt.status ?? '--'}",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Text(
+                    "Date: ${invoiceReceipt.date != null ? invoiceReceipt.date!.substring(0, 10) : '--'}",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
+            SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.all(10),
+                child: Text(
+                  "Description: ${invoiceReceipt.description ?? '--'}",
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 14),
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Text(
+                    "Updated At ${invoiceReceipt.updatedAt ?? '--'}",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14),
+                  ),
+                ),
+                const Spacer(),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Text(
+                    "Amount : ${invoiceReceipt.amount ?? '--'}",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 14),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      );
+
+  Widget buildDuesCard(Size size, String title, String value) => Container(
+        // margin: EdgeInsets.all(40),
+        padding: const EdgeInsets.all(10),
+        width: size.width * 0.33,
         child: Column(
           children: [
             Text(
@@ -100,7 +195,7 @@ class _DuesScreenState extends State<DuesScreen> {
             ),
             Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                   color: kPrimaryColor,
                   fontSize: 18,
                   fontWeight: FontWeight.bold),

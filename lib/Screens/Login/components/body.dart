@@ -108,7 +108,9 @@ class _BodyState extends State<Body> {
 
   loginSubmitted(String email, String password) {
     print("" + email + "" + password);
-    AuthService().login(email, password).then(
+    AuthService()
+        .login(email, password)
+        .then(
           (value) => {
             email = password = '',
             user = value,
@@ -150,6 +152,11 @@ class _BodyState extends State<Body> {
                 ),
               }
           },
-        );
+        )
+        .catchError((e) {
+      setState(() {
+        isApiCallProcess = false;
+      });
+    });
   }
 }
