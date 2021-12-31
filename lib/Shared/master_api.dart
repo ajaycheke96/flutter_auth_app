@@ -32,4 +32,6 @@ class MasterApi{
   // Employee
   static const getEmployeeProfileRecordByUser= '$baseUrl/employee/get-employee-profile-record';
 
+  // Communications
+  static const getNoticeByRoleName= '$baseUrl/notice/';
 }

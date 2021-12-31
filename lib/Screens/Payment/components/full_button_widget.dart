@@ -4,13 +4,13 @@ class CustomWidgetButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final String text;
-  final Function()? onTop;
+  final Function()? onTap;
   final bool? isBorder;
   const CustomWidgetButton({
     Key? key,
     this.backgroundColor = Colors.black,
     this.textColor,
-    this.onTop,
+    this.onTap,
     this.isBorder = false,
     required this.text,
   }) : super(key: key);
@@ -18,9 +18,7 @@ class CustomWidgetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print("Pressed");
-      },
+      onTap: onTap,
       child: Container(
         margin: EdgeInsets.only(left: 30, right: 30),
         height: 60,

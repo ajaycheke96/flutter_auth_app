@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_app/Screens/Payment/components/full_button_widget.dart';
 import 'package:flutter_auth_app/Screens/Payment/components/sized_text.dart';
+import 'package:flutter_auth_app/Screens/Payment/payment_screen.dart';
 import 'package:flutter_auth_app/constants.dart';
 
 class PaymentHomeScreen extends StatefulWidget {
@@ -223,6 +224,10 @@ class _PaymentHomeScreenState extends State<PaymentHomeScreen> {
         child: CustomWidgetButton(
           text: "Pay",
           textColor: Colors.white,
+          onTap: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => PaymentScreen()));
+          },
         ));
   }
 }
