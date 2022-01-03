@@ -146,31 +146,27 @@ class _StudentAttendanceEditRecordState
               )
             ],
           ),
-          DataTable(
-            columns: [
-              DataColumn(label: Text('Student Name')),
-              DataColumn(label: Text('Roll Number')),
-              DataColumn(label: Text('Option')),
-            ],
-            rows: studentAttendanceModel
-                .studentAttendanceDetails! // Loops through dataColumnText, each iteration assigning the value to element
-                .map(
-                  ((element) => DataRow(
-                        cells: <DataCell>[
-                          DataCell(
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: studentAttendanceModel.studentAttendanceDetails!
+                  .map((element) => Card(
+                        margin: const EdgeInsets.all(10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
                             Text(
-                              '${element.studentRecord!.student!.firstName} ${element.studentRecord!.student!.middleName} ${element.studentRecord!.student!.lastName}',
+                              '${element.studentRecord!.student!.firstName ?? ''} ${element.studentRecord!.student!.middleName ?? ''} ${element.studentRecord!.student!.lastName ?? ''}',
                               style:
                                   TextStyle(fontSize: 16, color: Colors.black),
                             ),
-                          ), //Extracting from Map element the value
-                          DataCell(Text(
+                            Text(
                               element.studentRecord!.rollNumber != null
                                   ? element.studentRecord!.rollNumber.toString()
                                   : '--',
-                              style: TextStyle(
-                                  fontSize: 16, color: Colors.black))),
-                          DataCell(
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.black),
+                            ),
                             IconButton(
                               color: element.status != 'ABSENT'
                                   ? Colors.greenAccent
@@ -189,12 +185,110 @@ class _StudentAttendanceEditRecordState
                                   ? Icons.check
                                   : Icons.close),
                             ),
-                          ),
-                        ],
-                      )),
-                )
-                .toList(),
+                          ],
+                        ),
+                      ))
+                  .toList(),
+            ),
           ),
+          // Container(
+          //   child: ListView.builder(
+          //     itemCount:
+          //         studentAttendanceModel.studentAttendanceDetails!.length,
+          //     itemBuilder: (context, index) {
+          //       StudentAttendanceDetailModel element = studentAttendanceModel
+          //           .studentAttendanceDetails!
+          //           .elementAt(index);
+          //       return Card(
+          //         child: Column(
+          //           children: [
+          //             Row(
+          //               children: [
+          //                 Text(
+          //                   '${element.studentRecord!.student!.firstName ?? ''} ${element.studentRecord!.student!.middleName ?? ''} ${element.studentRecord!.student!.lastName ?? ''}',
+          //                   style: TextStyle(fontSize: 16, color: Colors.black),
+          //                 ),
+          //                 Text(
+          //                   element.studentRecord!.rollNumber != null
+          //                       ? element.studentRecord!.rollNumber.toString()
+          //                       : '--',
+          //                   style: TextStyle(fontSize: 16, color: Colors.black),
+          //                 ),
+          //                 IconButton(
+          //                   color: element.status != 'ABSENT'
+          //                       ? Colors.greenAccent
+          //                       : Colors.redAccent,
+          //                   onPressed: () {
+          //                     print(element.status);
+          //                     setState(
+          //                       () {
+          //                         element.status = element.status != 'ABSENT'
+          //                             ? 'ABSENT'
+          //                             : 'PRESENT';
+          //                       },
+          //                     );
+          //                   },
+          //                   icon: Icon(element.status != 'ABSENT'
+          //                       ? Icons.check
+          //                       : Icons.close),
+          //                 ),
+          //               ],
+          //             ),
+          //           ],
+          //         ),
+          //       );
+          //     },
+          //   ),
+          // ),
+          // DataTable(
+          //   columns: [
+          //     DataColumn(label: Text('Student Name')),
+          //     DataColumn(label: Text('Roll Number')),
+          //     DataColumn(label: Text('Option')),
+          //   ],
+          //   rows: studentAttendanceModel
+          //       .studentAttendanceDetails! // Loops through dataColumnText, each iteration assigning the value to element
+          //       .map(
+          //         ((element) => DataRow(
+          //               cells: <DataCell>[
+          //                 DataCell(
+          //                   Text(
+          //                     '${element.studentRecord!.student!.firstName} ${element.studentRecord!.student!.middleName} ${element.studentRecord!.student!.lastName}',
+          //                     style:
+          //                         TextStyle(fontSize: 16, color: Colors.black),
+          //                   ),
+          //                 ), //Extracting from Map element the value
+          //                 DataCell(Text(
+          //                     element.studentRecord!.rollNumber != null
+          //                         ? element.studentRecord!.rollNumber.toString()
+          //                         : '--',
+          //                     style: TextStyle(
+          //                         fontSize: 16, color: Colors.black))),
+          //                 DataCell(
+          //                   IconButton(
+          //                     color: element.status != 'ABSENT'
+          //                         ? Colors.greenAccent
+          //                         : Colors.redAccent,
+          //                     onPressed: () {
+          //                       print(element.status);
+          //                       setState(
+          //                         () {
+          //                           element.status = element.status != 'ABSENT'
+          //                               ? 'ABSENT'
+          //                               : 'PRESENT';
+          //                         },
+          //                       );
+          //                     },
+          //                     icon: Icon(element.status != 'ABSENT'
+          //                         ? Icons.check
+          //                         : Icons.close),
+          //                   ),
+          //                 ),
+          //               ],
+          //             )),
+          //       )
+          //       .toList(),
+          // ),
           SizedBox(
             height: 12,
           ),

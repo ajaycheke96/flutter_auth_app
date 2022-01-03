@@ -15,7 +15,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    meetings = _getDataSource();
+    _getDataSource();
     super.initState();
   }
 
@@ -71,7 +71,7 @@ class _TimetableScreenState extends State<TimetableScreen> {
     return color;
   }
 
-  List<Meeting> _getDataSource() {
+  void _getDataSource() {
     final List<Meeting> meetings = <Meeting>[];
     _academicService.getAllEventsByUser().then((value) {
       if (value.isNotEmpty) {
@@ -114,7 +114,10 @@ class _TimetableScreenState extends State<TimetableScreen> {
     //     to: endTime2.add(Duration(days: 1)),
     //     background: const Color(0xFF0F8644),
     //     isAllDay: true));
-    return meetings;
+    // return meetings;
+    setState(() {
+      this.meetings = meetings;
+    });
   }
 }
 

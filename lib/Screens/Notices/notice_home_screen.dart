@@ -36,55 +36,60 @@ class _NoticeHomeScreenState extends State<NoticeHomeScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      child: ListView.builder(
-        itemCount: _mapList.length,
-        itemBuilder: (_, index) {
-          return Container(
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              border: Border.all(color: Colors.grey),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Title : ${_mapList.elementAt(index).title!.toUpperCase()}",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black),
-                ),
-                Text(
-                  "To : ${_mapList.elementAt(index).targetRoles}",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black38),
-                ),
-                SizedBox(height: 10),
-                SingleChildScrollView(
-                  child: Container(
-                    child: Text(
-                      "Description : ${_mapList.elementAt(index).description}",
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("All Notices"),
+      ),
+      body: Container(
+        child: ListView.builder(
+          itemCount: _mapList.length,
+          itemBuilder: (_, index) {
+            return Container(
+              margin: EdgeInsets.all(10),
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                border: Border.all(color: Colors.grey),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Title : ${_mapList.elementAt(index).title!.toUpperCase()}",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black),
+                  ),
+                  Text(
+                    "To : ${_mapList.elementAt(index).targetRoles}",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black38),
+                  ),
+                  SizedBox(height: 10),
+                  SingleChildScrollView(
+                    child: Container(
+                      child: Text(
+                        "Description : ${_mapList.elementAt(index).description}",
+                        style: TextStyle(fontSize: 18, color: Colors.black),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  "Title : ${_mapList.elementAt(index).createdAt}",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black38),
-                ),
-              ],
-            ),
-          );
-        },
+                  SizedBox(height: 10),
+                  Text(
+                    "Created At : ${_mapList.elementAt(index).createdAt}",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black38),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

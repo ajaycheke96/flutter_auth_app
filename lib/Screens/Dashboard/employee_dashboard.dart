@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/Screens/Dashboard/components/logout_button.dart';
 import 'package:flutter_auth_app/Screens/Login/login_screen.dart';
+import 'package:flutter_auth_app/Screens/Notices/notice_dashboard.dart';
 import 'package:flutter_auth_app/Screens/Students/student_attendance_screen.dart';
 import 'package:flutter_auth_app/Screens/Timetable/timetable_screen.dart';
 import 'package:flutter_auth_app/Screens/UserProfile/employee_user_profile.dart';
@@ -21,12 +22,17 @@ class _EmployeeDashboardState extends State<EmployeeDashboard> {
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    Center(
-      child: Text(
-        "Home / Dashboard page",
-        style: TextStyle(fontSize: 24),
-      ),
+    Column(
+      children: [
+        NoticeDashboard(),
+      ],
     ),
+    // Center(
+    //   child: Text(
+    //     "Home / Dashboard page",
+    //     style: TextStyle(fontSize: 24),
+    //   ),
+    // ),
     Center(
       child: Text(
         "Activity Page",

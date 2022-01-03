@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/Screens/Dues/dues_screen.dart';
+import 'package:flutter_auth_app/Screens/Notices/notice_dashboard.dart';
 import 'package:flutter_auth_app/Screens/Notices/notice_home_screen.dart';
 import 'package:flutter_auth_app/Screens/Payment/payment_home_screen.dart';
 import 'package:flutter_auth_app/Screens/Students/StudentAttendance/student_attendance_list_screen.dart';
@@ -23,12 +24,17 @@ class _StudentDashboardState extends State<StudentDashboard> {
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    Center(
-      child: Text(
-        "Home / Dashboard page",
-        style: TextStyle(fontSize: 24),
-      ),
+    Column(
+      children: [
+        NoticeDashboard(),
+      ],
     ),
+    // Center(
+    //   child: Text(
+    //     "Home / Dashboard page",
+    //     style: TextStyle(fontSize: 24),
+    //   ),
+    // ),
     PaymentHomeScreen(),
     // Center(
     //   child:
@@ -52,18 +58,13 @@ class _StudentDashboardState extends State<StudentDashboard> {
     //     style: TextStyle(fontSize: 24),
     //   ),
     // ),
-    NoticeHomeScreen(),
-    // Center(
-    //   child: Column(
-    //     children: [
-    //       Text(
-    //         "Community page",
-    //         style: TextStyle(fontSize: 24),
-    //       ),
-    //       ElevatedButton(onPressed: StudentDashboard.gotoNoticePage(), child: Text("Notice Page"))
-    //     ],
-    //   ),
-    // ),
+    // NoticeHomeScreen(),
+    Center(
+      child: Text(
+        "Community page",
+        style: TextStyle(fontSize: 24),
+      ),
+    ),
     UserProfile(),
   ];
 
@@ -110,9 +111,6 @@ class _StudentDashboardState extends State<StudentDashboard> {
         backgroundColor: Colors.blueAccent[400],
         elevation: 50.0,
         systemOverlayStyle: SystemUiOverlayStyle.dark,
-      ),
-      body: Container(
-        child: _widgetOptions.elementAt(_selectedIndex),
       ),
       drawer: HttpUtils().buildLogoutDrawer(context),
       bottomNavigationBar: // BottomWidgetBar(),
@@ -202,6 +200,9 @@ class _StudentDashboardState extends State<StudentDashboard> {
             // HttpUtils.showSuccess(context, "$index no. Page has been selected!");
           });
         },
+      ),
+      body: Container(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
     );
   }

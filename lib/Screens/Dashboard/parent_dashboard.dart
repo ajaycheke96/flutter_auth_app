@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_auth_app/Screens/Login/login_screen.dart';
+import 'package:flutter_auth_app/Screens/Notices/notice_dashboard.dart';
 import 'package:flutter_auth_app/Screens/UserProfile/parent_user_profile.dart';
 import 'package:flutter_auth_app/Services/auth_service.dart';
 import 'package:flutter_auth_app/constants.dart';
@@ -18,12 +19,17 @@ class _ParentDashboardState extends State<ParentDashboard> {
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    Center(
-      child: Text(
-        "Home / Dashboard page",
-        style: TextStyle(fontSize: 24),
-      ),
+    Column(
+      children: [
+        NoticeDashboard(),
+      ],
     ),
+    // Center(
+    //   child: Text(
+    //     "Home / Dashboard page",
+    //     style: TextStyle(fontSize: 24),
+    //   ),
+    // ),
     Center(
       child: Text(
         "Activity Page",

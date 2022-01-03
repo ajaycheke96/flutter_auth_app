@@ -70,55 +70,99 @@ class _StudentAttendanceListScreenState
                 } else if (snapshot.data != null) {
                   List<StudentAttendanceModel> list = snapshot.data!;
                   return SingleChildScrollView(
-                    child: DataTable(
-                      columns: [
-                        DataColumn(label: Text('Date')),
-                        DataColumn(label: Text('Attendance')),
-                        DataColumn(label: Text('Option')),
-                      ],
-                      rows: list
-                          .map(
-                            ((studentAttendanceModel) => DataRow(
-                                  cells: <DataCell>[
-                                    DataCell(
-                                      Text(
-                                        '${studentAttendanceModel.dateOfAttendance}',
-                                        style: TextStyle(
-                                            fontSize: 16, color: Colors.black),
-                                      ),
-                                    ), //Extracting from Map element the value
-                                    DataCell(Text(
-                                        '${studentAttendanceModel.attendance}',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            color: Colors.black))),
-                                    DataCell(
-                                      IconButton(
-                                        onPressed: () {
-                                          print(
-                                              '${studentAttendanceModel.dateOfAttendance} has pressed!');
-                                          Navigator.of(context)
-                                              .pushNamed(
-                                                  StudentAttendanceDayScreen
-                                                      .routeName,
-                                                  arguments:
-                                                      studentAttendanceModel
-                                                          .toJson())
-                                              .then((value) {
-                                            if (value == true) {
-                                              didUpdateWidget(this.widget);
-                                            }
-                                          });
-                                        },
-                                        icon: Icon(Icons.edit),
-                                      ),
+                    child: Column(
+                      children: list
+                          .map((studentAttendanceModel) => Card(
+                                margin: EdgeInsets.all(10),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '${studentAttendanceModel.dateOfAttendance}',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.black),
+                                    ),
+                                    Text(
+                                      '${studentAttendanceModel.attendance}',
+                                      style: TextStyle(
+                                          fontSize: 16, color: Colors.black),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        print(
+                                            '${studentAttendanceModel.dateOfAttendance} has pressed!');
+                                        Navigator.of(context)
+                                            .pushNamed(
+                                                StudentAttendanceDayScreen
+                                                    .routeName,
+                                                arguments:
+                                                    studentAttendanceModel
+                                                        .toJson())
+                                            .then((value) {
+                                          if (value == true) {
+                                            didUpdateWidget(this.widget);
+                                          }
+                                        });
+                                      },
+                                      icon: Icon(Icons.edit),
                                     ),
                                   ],
-                                )),
-                          )
+                                ),
+                              ))
                           .toList(),
                     ),
                   );
+                  // return SingleChildScrollView(
+                  //   child: DataTable(
+                  //     columns: [
+                  //       DataColumn(label: Text('Date')),
+                  //       DataColumn(label: Text('Attendance')),
+                  //       DataColumn(label: Text('Option')),
+                  //     ],
+                  //     rows: list
+                  //         .map(
+                  //           ((studentAttendanceModel) => DataRow(
+                  //                 cells: <DataCell>[
+                  //                   DataCell(
+                  //                     Text(
+                  //                       '${studentAttendanceModel.dateOfAttendance}',
+                  //                       style: TextStyle(
+                  //                           fontSize: 16, color: Colors.black),
+                  //                     ),
+                  //                   ), //Extracting from Map element the value
+                  //                   DataCell(Text(
+                  //                       '${studentAttendanceModel.attendance}',
+                  //                       style: TextStyle(
+                  //                           fontSize: 16,
+                  //                           color: Colors.black))),
+                  //                   DataCell(
+                  //                     IconButton(
+                  //                       onPressed: () {
+                  //                         print(
+                  //                             '${studentAttendanceModel.dateOfAttendance} has pressed!');
+                  //                         Navigator.of(context)
+                  //                             .pushNamed(
+                  //                                 StudentAttendanceDayScreen
+                  //                                     .routeName,
+                  //                                 arguments:
+                  //                                     studentAttendanceModel
+                  //                                         .toJson())
+                  //                             .then((value) {
+                  //                           if (value == true) {
+                  //                             didUpdateWidget(this.widget);
+                  //                           }
+                  //                         });
+                  //                       },
+                  //                       icon: Icon(Icons.edit),
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               )),
+                  //         )
+                  //         .toList(),
+                  //   ),
+                  // );
                 }
             }
             // return ListViewCustom(

@@ -55,6 +55,8 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
   Widget build(BuildContext context) {
     _preBuildFunction();
     return Container(
+      margin: EdgeInsets.all(20),
+      padding: EdgeInsets.all(20),
       child: Column(children: widgets),
     );
   }
@@ -63,6 +65,7 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
     setState(() {
       widgets = [
         _buildSubjectAutoComplete(),
+        SizedBox(height: 20),
         // _buildBatchAutoComplete(),
         // CalendarDatePicker(
         //   initialDate: DateTime.now(),
@@ -77,7 +80,9 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
         // ),
 
         _buildMonthDropdown(),
+        SizedBox(height: 20),
         _buildYearDropdown(),
+        SizedBox(height: 20),
 
         ElevatedButton(
           onPressed: () {
@@ -138,10 +143,14 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
 
   Widget _buildSubjectAutoComplete() {
     return Container(
-      alignment: Alignment.center,
-      width: (MediaQuery.of(context).size.width * 0.8),
-      margin: EdgeInsets.symmetric(vertical: 24, horizontal: 30),
+      // alignment: Alignment.center,
+      // width: (MediaQuery.of(context).size.width * 0.8),
+      // margin: EdgeInsets.symmetric(vertical: 24, horizontal: 30),
       child: Autocomplete<SubjectModel>(
+        // initialValue: selectedSubject.id != null
+        //     ? TextEditingValue(
+        //         text: _displaySubjectStringForOption(selectedSubject))
+        //     : TextEditingValue(text: ''),
         displayStringForOption: _displaySubjectStringForOption,
         optionsBuilder: (TextEditingValue textEditingValue) {
           if (textEditingValue.text == '') {
@@ -170,6 +179,7 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
       icon: const Icon(Icons.arrow_drop_down),
       elevation: 16,
       style: const TextStyle(color: kPrimaryColor),
+      hint: const Text("Select Month"),
       underline: Container(
         height: 2,
         color: kPrimaryColor,
