@@ -146,51 +146,128 @@ class _StudentAttendanceEditRecordState
               )
             ],
           ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: studentAttendanceModel.studentAttendanceDetails!
-                  .map((element) => Card(
-                        margin: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '${element.studentRecord!.student!.firstName ?? ''} ${element.studentRecord!.student!.middleName ?? ''} ${element.studentRecord!.student!.lastName ?? ''}',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.black),
-                            ),
-                            Text(
-                              element.studentRecord!.rollNumber != null
-                                  ? element.studentRecord!.rollNumber.toString()
-                                  : '--',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.black),
-                            ),
-                            IconButton(
-                              color: element.status != 'ABSENT'
-                                  ? Colors.greenAccent
-                                  : Colors.redAccent,
-                              onPressed: () {
-                                print(element.status);
-                                setState(
-                                  () {
-                                    element.status = element.status != 'ABSENT'
-                                        ? 'ABSENT'
-                                        : 'PRESENT';
-                                  },
-                                );
-                              },
-                              icon: Icon(element.status != 'ABSENT'
-                                  ? Icons.check
-                                  : Icons.close),
-                            ),
-                          ],
-                        ),
-                      ))
-                  .toList(),
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: studentAttendanceModel.studentAttendanceDetails!
+                .map((element) => Card(
+                      margin: const EdgeInsets.all(10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${element.studentRecord!.student!.firstName ?? ''} ${element.studentRecord!.student!.middleName ?? ''} ${element.studentRecord!.student!.lastName ?? ''}',
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+                          Text(
+                            element.studentRecord!.rollNumber != null
+                                ? element.studentRecord!.rollNumber.toString()
+                                : '--',
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+                          IconButton(
+                            color: element.status != 'ABSENT'
+                                ? Colors.greenAccent
+                                : Colors.redAccent,
+                            onPressed: () {
+                              print(element.status);
+                              setState(
+                                () {
+                                  element.status = element.status != 'ABSENT'
+                                      ? 'ABSENT'
+                                      : 'PRESENT';
+                                },
+                              );
+                            },
+                            icon: Icon(element.status != 'ABSENT'
+                                ? Icons.check
+                                : Icons.close),
+                          ),
+                        ],
+                      ),
+                    ))
+                .toList(),
           ),
+
+          // Container(
+          //     child: Column(
+          //   children: studentAttendanceModel.studentAttendanceDetails!
+          //       .map((element) => Column(
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             children: <Widget>[
+          //               Expanded(
+          //                 child: Column(
+          //                   crossAxisAlignment: CrossAxisAlignment.start,
+          //                   children: <Widget>[
+          //                     Text(
+          //                       '${element.studentRecord!.student!.firstName ?? ''} ${element.studentRecord!.student!.middleName ?? ''} ${element.studentRecord!.student!.lastName ?? ''}',
+          //                       maxLines: 2,
+          //                       overflow: TextOverflow.ellipsis,
+          //                       style: const TextStyle(
+          //                         fontWeight: FontWeight.bold,
+          //                       ),
+          //                     ),
+          //                     const Padding(
+          //                         padding: EdgeInsets.only(bottom: 2.0)),
+          //                     Text(
+          //                       element.studentRecord!.rollNumber != null
+          //                           ? element.studentRecord!.rollNumber
+          //                               .toString()
+          //                           : '--',
+          //                       maxLines: 2,
+          //                       overflow: TextOverflow.ellipsis,
+          //                       style: const TextStyle(
+          //                         fontSize: 12.0,
+          //                         color: Colors.black54,
+          //                       ),
+          //                     ),
+          //                   ],
+          //                 ),
+          //               ),
+          //               Expanded(
+          //                 child: Column(
+          //                   crossAxisAlignment: CrossAxisAlignment.start,
+          //                   mainAxisAlignment: MainAxisAlignment.end,
+          //                   children: <Widget>[
+          //                     Text(
+          //                       'Status',
+          //                       style: const TextStyle(
+          //                         fontSize: 12.0,
+          //                         color: Colors.black87,
+          //                       ),
+          //                     ),
+          //                     IconButton(
+          //                       color: element.status != 'ABSENT'
+          //                           ? Colors.greenAccent
+          //                           : Colors.redAccent,
+          //                       onPressed: () {
+          //                         print(element.status);
+          //                         setState(
+          //                           () {
+          //                             element.status =
+          //                                 element.status != 'ABSENT'
+          //                                     ? 'ABSENT'
+          //                                     : 'PRESENT';
+          //                           },
+          //                         );
+          //                       },
+          //                       icon: Icon(element.status != 'ABSENT'
+          //                           ? Icons.check
+          //                           : Icons.close),
+          //                     )
+          //                     // Text(
+          //                     //   '$publishDate - $readDuration',
+          //                     //   style: const TextStyle(
+          //                     //     fontSize: 12.0,
+          //                     //     color: Colors.black54,
+          //                     //   ),
+          //                     // ),
+          //                   ],
+          //                 ),
+          //               ),
+          //             ],
+          //           ))
+          //       .toList(),
+          // )),
           // Container(
           //   child: ListView.builder(
           //     itemCount:

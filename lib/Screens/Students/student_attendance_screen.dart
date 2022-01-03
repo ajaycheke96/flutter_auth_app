@@ -19,8 +19,8 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
 
   SubjectModel selectedSubject = SubjectModel();
   BatchModel selectedBatch = BatchModel();
-  String selectedMonth = months.first;
-  int selectedYear = DateTime.now().year;
+  String? selectedMonth;
+  int? selectedYear;
   DateTime selectedDate = DateTime.now();
   List<BatchModel> batchOptions = [];
   List<SubjectModel> subjectOptions = [];
@@ -88,7 +88,7 @@ class _StudentAttendanceScreenState extends State<StudentAttendanceScreen> {
           onPressed: () {
             if (selectedSubject.batch!.id != null &&
                 selectedSubject.id != null &&
-                selectedMonth.isNotEmpty &&
+                selectedMonth!.isNotEmpty &&
                 selectedYear != null) {
               print("done");
               Navigator.of(context).pushNamed(
